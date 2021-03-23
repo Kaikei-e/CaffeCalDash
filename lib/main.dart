@@ -10,7 +10,10 @@ class MyApp extends StatelessWidget{
     return new MaterialApp(
       title: 'CaffeCalDash',
       theme: ThemeData(
-        fontFamily: "SF-Mono"
+        fontFamily: "SF-Mono",
+        primaryColor: Colors.blueGrey[800],
+        accentColor: Colors.blueGrey[600],
+
       ),
       home: Stack(
         children: <Widget>[
@@ -32,6 +35,13 @@ class MyApp extends StatelessWidget{
             ),
             body: Container(
               color: Colors.transparent,
+              child: Container(
+                child: Form(
+                  child: TextFormField(
+                    keyboardType: TextInputType.number,
+                  ),
+                ),
+              ),
             ),
           )
         ],
