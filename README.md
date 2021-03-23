@@ -1,16 +1,12 @@
-# caffecaldash
+# CaffeCalDash
 
-A new Flutter application.
+## ...under construction...
 
-## Getting Started
+## CaffeCalDash is a simple web application written in the Dart, which also makes use of the Flutter framework. Here is a simple program to calculate the attenuation of caffeine, with multiple drinks and multiple calculation methods.
 
-This project is a starting point for a Flutter application.
+## There are two types of calculation functions: Mode1 and Mode2.
+## Mode1 calculates the amount of caffeine in mg per 100 ml from the total amount of the drink; Mode2 can calculate only the total amount of caffeine in mg.
+## For each drink or pill, the aforementioned Mode1 and Mode2 can be applied.
 
-A few resources to get you started if this is your first Flutter project:
+## ...Currently being created...
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
