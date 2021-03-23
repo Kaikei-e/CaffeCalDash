@@ -9,6 +9,9 @@ class MyApp extends StatelessWidget{
   Widget build(BuildContext context){
     return new MaterialApp(
       title: 'CaffeCalDash',
+      theme: ThemeData(
+        fontFamily: "SF-Mono"
+      ),
       home: Stack(
         children: <Widget>[
           new Container(
