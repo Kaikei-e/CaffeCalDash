@@ -57,6 +57,7 @@ class MyApp extends StatelessWidget {
                     keyboardType: TextInputType.number,
                     style: TextStyle(
                       color: Colors.white,
+
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -67,11 +68,11 @@ class MyApp extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                        vertical: 16.0, horizontal: 16.0),
+                        vertical: 16.0, horizontal: 20.0),
                     child: ElevatedButton(
                       style: ButtonStyle(
                         backgroundColor:
-                            MaterialStateProperty.all(Colors.white30),
+                            MaterialStateProperty.all(Colors.white60),
                       ),
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
@@ -82,7 +83,7 @@ class MyApp extends StatelessWidget {
                       child: Text(
                         'Submit',
                         style: TextStyle(
-                          color: Colors.black87,
+                          color: Colors.black54,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
