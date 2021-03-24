@@ -8,15 +8,14 @@ class MyApp extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   static const IconData tea_cup = IconData(0xf1a6, fontFamily: 'MaterialIcons');
 
-
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: 'CaffeCalDash',
       theme: ThemeData(
         fontFamily: "SF-Mono",
-        primaryColor: Colors.blueGrey[800],
-        accentColor: Colors.blueGrey[600],
+        primaryColor: Colors.blueGrey[100],
+        accentColor: Colors.white,
       ),
       home: Stack(
         children: <Widget>[
@@ -43,26 +42,50 @@ class MyApp extends StatelessWidget {
                 children: <Widget>[
                   TextFormField(
                     decoration: const InputDecoration(
-                  icon: Icon(tea_cup)
-              ),
+                      icon: Icon(
+                        tea_cup,
+                        color: Colors.white,
+                        size: 30,
+                      ),
+                      labelText:
+                          'Enter the number of drinks you want to calculate',
+                      labelStyle: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                      ),
+                    ),
+                    keyboardType: TextInputType.number,
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter some value.';
                       }
                       return null;
                     },
-                    keyboardType: TextInputType.number,
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 16.0, horizontal: 16.0),
                     child: ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.white30),
+                      ),
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text('Proccesind Data')));
                         }
                       },
-                      child: Text('Submit'),
+                      child: Text(
+                        'Submit',
+                        style: TextStyle(
+                          color: Colors.black87,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ),
                 ],
