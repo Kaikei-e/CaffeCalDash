@@ -4,16 +4,17 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget{
+class MyApp extends StatelessWidget {
+  final _formKey = GlobalKey<FormState>();
+
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return new MaterialApp(
       title: 'CaffeCalDash',
       theme: ThemeData(
         fontFamily: "SF-Mono",
         primaryColor: Colors.blueGrey[800],
         accentColor: Colors.blueGrey[600],
-
       ),
       home: Stack(
         children: <Widget>[
@@ -21,33 +22,50 @@ class MyApp extends StatelessWidget{
             height: double.infinity,
             width: double.infinity,
             decoration: new BoxDecoration(
-              image: new DecorationImage(
-                  image: new AssetImage("images/cup_books.jpg"),
-              fit: BoxFit.cover)
-            ),
+                image: new DecorationImage(
+                    image: new AssetImage("images/cup_books.jpg"),
+                    fit: BoxFit.cover)),
           ),
           Scaffold(
             backgroundColor: Colors.transparent,
             appBar: new AppBar(
               title: Text("CaffeCalDash"),
-              backgroundColor: Colors.brown[100].withOpacity(0.5),
+              backgroundColor: Colors.brown[100]!.withOpacity(0.5),
               elevation: 0.0,
             ),
             body: Container(
               color: Colors.transparent,
-              child: Container(
-                child: Form(
-                  child: TextFormField(
+              child: Column(
+                key: _formKey,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter some value.';
+                      }
+                      return null;
+                    },
                     keyboardType: TextInputType.number,
                   ),
-                ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Proccesind Data')));
+                        }
+                      },
+                      child: Text('Submit'),
+                    ),
+                  ),
+                ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );
-
   }
-
 }
