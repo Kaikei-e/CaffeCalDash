@@ -6,6 +6,8 @@ void main() {
 
 class MyApp extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
+  static const IconData tea_cup = IconData(0xf1a6, fontFamily: 'MaterialIcons');
+
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +42,9 @@ class MyApp extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   TextFormField(
+                    decoration: const InputDecoration(
+                  icon: Icon(tea_cup)
+              ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter some value.';
