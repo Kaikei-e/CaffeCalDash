@@ -1,4 +1,8 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -41,6 +45,7 @@ class MyApp extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   TextFormField(
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     decoration: const InputDecoration(
                       icon: Icon(
                         tea_cup,
@@ -60,9 +65,11 @@ class MyApp extends StatelessWidget {
 
                     ),
                     validator: (value) {
+
                       if (value == null || value.isEmpty) {
                         return 'Please enter some value.';
                       }
+
                       return null;
                     },
                   ),
@@ -83,12 +90,16 @@ class MyApp extends StatelessWidget {
                       child: Text(
                         'Submit',
                         style: TextStyle(
-                          color: Colors.black54,
-                          fontWeight: FontWeight.bold,
+                          color: Colors.black87,
                         ),
                       ),
                     ),
                   ),
+                  
+                    ? ListView.builder(itemBuilder: )
+                      },
+                    },
+                  )
                 ],
               ),
             ),
