@@ -9,7 +9,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>();
+  var NumOfDrinks = 0;
   static const IconData tea_cup = IconData(0xf1a6, fontFamily: 'MaterialIcons');
 
   @override
@@ -38,74 +38,72 @@ class MyApp extends StatelessWidget {
               backgroundColor: Colors.brown[100]!.withOpacity(0.5),
               elevation: 0.0,
             ),
-            body: Container(
-              color: Colors.transparent,
-              child: Column(
-                key: _formKey,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  TextFormField(
-                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                    decoration: const InputDecoration(
-                      icon: Icon(
-                        tea_cup,
+            body: SafeArea(
+              child: Container(
+                color: Colors.transparent,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    TextFormField(
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      decoration: const InputDecoration(
+                        icon: Icon(
+                          tea_cup,
+                          color: Colors.white,
+                          size: 30,
+                        ),
+                        labelText:
+                            'Enter the number of drinks you want to calculate',
+                        labelStyle: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
+                      ),
+                      keyboardType: TextInputType.number,
+                      style: TextStyle(
                         color: Colors.white,
-                        size: 30,
-                      ),
-                      labelText:
-                          'Enter the number of drinks you want to calculate',
-                      labelStyle: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                      ),
-                    ),
-                    keyboardType: TextInputType.number,
-                    style: TextStyle(
-                      color: Colors.white,
 
-                    ),
-                    validator: (value) {
-
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter some value.';
-                      }
-
-                      return null;
-                    },
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 16.0, horizontal: 20.0),
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.white60),
                       ),
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('Proccesind Data')));
+                      validator: (value) {
+
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter some value.';
                         }
+
+                        return null;
                       },
-                      child: Text(
-                        'Submit',
-                        style: TextStyle(
-                          color: Colors.black87,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 16.0, horizontal: 20.0),
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.white60),
+                        ),
+                        onPressed: () {
+                          if () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Proccesind Data')));
+                          }
+                        },
+                        child: Text(
+                          'Submit',
+                          style: TextStyle(
+                            color: Colors.black87,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  
-                    ? ListView.builder(itemBuilder: )
-                      },
-                    },
-                  )
-                ],
+                    Text('Number of drinks are $_formKey[0]'),
+                  ],
+                ),
               ),
             ),
           ),
         ],
       ),
     );
+
   }
 }
