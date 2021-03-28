@@ -1,3 +1,4 @@
+import 'dart:html';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -9,12 +10,17 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  var NumOfDrinks = 0;
+  final _formkey = GlobalKey<FormState>();
+  final numController = TextEditingController();
+
+
+  int _NumOfDrinks = 0;
   static const IconData tea_cup = IconData(0xf1a6, fontFamily: 'MaterialIcons');
 
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
+      key: _formkey,
       title: 'CaffeCalDash',
       theme: ThemeData(
         fontFamily: "SF-Mono",
@@ -45,7 +51,18 @@ class MyApp extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     TextFormField(
+                      controller: numController,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      maxLength: 2,
+                      onFieldSubmitted: (value){
+                      this._NumOfDrinks = int.parse(value);
+                      },
+                      onChanged: (value){
+                        _NumOfDrinks = int.parse(value);
+                      },
+                      onSaved: (value){
+                        _NumOfDrinks = int.parse(value!);
+                      },
                       decoration: const InputDecoration(
                         icon: Icon(
                           tea_cup,
@@ -62,14 +79,11 @@ class MyApp extends StatelessWidget {
                       keyboardType: TextInputType.number,
                       style: TextStyle(
                         color: Colors.white,
-
                       ),
                       validator: (value) {
-
                         if (value == null || value.isEmpty) {
                           return 'Please enter some value.';
                         }
-
                         return null;
                       },
                     ),
@@ -81,11 +95,9 @@ class MyApp extends StatelessWidget {
                           backgroundColor:
                               MaterialStateProperty.all(Colors.white60),
                         ),
-                        onPressed: () {
-                          if () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Proccesind Data')));
-                          }
+                        onPressed: (){
+                          final _numDrinks = numController.text;
+                          _NumOfDrinks = int.parse(_numDrinks);
                         },
                         child: Text(
                           'Submit',
@@ -95,7 +107,7 @@ class MyApp extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Text('Number of drinks are $_formKey[0]'),
+                    Text('Number of drinks are $_NumOfDrinks'),
                   ],
                 ),
               ),
