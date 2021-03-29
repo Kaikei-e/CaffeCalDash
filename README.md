@@ -1,4 +1,4 @@
-# CaffeCalDash
+# CaffeCalDash: A simple caffeine calculator
 
 ## ...under construction...
 
