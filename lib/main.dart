@@ -4,7 +4,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-
 void main() {
   runApp(MyApp());
 }
@@ -13,9 +12,8 @@ class MyApp extends StatelessWidget {
   final _formkey = GlobalKey<FormState>();
   final numController = TextEditingController();
 
-
   int _NumOfDrinks = 0;
-  static const IconData tea_cup = IconData(0xf1a6, fontFamily: 'MaterialIcons');
+  static const IconData tea_cup = new AssetImage("images/tea_cup.svg");
 
   @override
   Widget build(BuildContext context) {
@@ -54,13 +52,13 @@ class MyApp extends StatelessWidget {
                       controller: numController,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       maxLength: 2,
-                      onFieldSubmitted: (value){
-                      this._NumOfDrinks = int.parse(value);
+                      onFieldSubmitted: (value) {
+                        this._NumOfDrinks = int.parse(value);
                       },
-                      onChanged: (value){
+                      onChanged: (value) {
                         _NumOfDrinks = int.parse(value);
                       },
-                      onSaved: (value){
+                      onSaved: (value) {
                         _NumOfDrinks = int.parse(value!);
                       },
                       decoration: const InputDecoration(
@@ -95,7 +93,7 @@ class MyApp extends StatelessWidget {
                           backgroundColor:
                               MaterialStateProperty.all(Colors.white60),
                         ),
-                        onPressed: (){
+                        onPressed: () {
                           final _numDrinks = numController.text;
                           _NumOfDrinks = int.parse(_numDrinks);
                         },
@@ -116,6 +114,5 @@ class MyApp extends StatelessWidget {
         ],
       ),
     );
-
   }
 }
