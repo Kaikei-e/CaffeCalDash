@@ -3,6 +3,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/avd.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 
 void main() {
@@ -12,10 +14,12 @@ void main() {
 class MyApp extends StatelessWidget {
   final _formkey = GlobalKey<FormState>();
   final numController = TextEditingController();
+  final teaCupSVG = 'images/tea_cup.svg';
+  final Widget teaCup = SvgPicture.asset(teaCupSVG, color: Colors.white70);
 
 
   int _NumOfDrinks = 0;
-  static const IconData tea_cup = IconData(0xf1a6, fontFamily: 'MaterialIcons');
+  //static const IconData tea_cup = IconData(0xf1a6, fontFamily: 'MaterialIcons');
 
   @override
   Widget build(BuildContext context) {
