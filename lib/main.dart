@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -103,7 +104,14 @@ class MyApp extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Text('Number of drinks are $_NumOfDrinks'),
+                    Text(
+                      'Number of drinks are $_NumOfDrinks',
+                      style: TextStyle(
+                        backgroundColor: Colors.white30,
+                        color: Colors.black87,
+                        fontSize: 18,
+                      ),
+                    ),
                   ],
                 ),
               ),
