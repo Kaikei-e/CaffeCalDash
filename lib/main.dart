@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/avd.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-
 void main() {
   runApp(MyApp());
 }
@@ -14,9 +13,12 @@ void main() {
 class MyApp extends StatelessWidget {
   final _formkey = GlobalKey<FormState>();
   final numController = TextEditingController();
-  final teaCupSVG = 'images/tea_cup.svg';
-  final Widget teaCup = SvgPicture.asset(teaCupSVG, color: Colors.white70);
-
+  static const teaCupSVG = 'images/tea_cup.svg';
+  final Widget teaCup = SvgPicture.asset(
+    teaCupSVG,
+    color: Colors.white70,
+    semanticsLabel: 'tea cup',
+  );
 
   int _NumOfDrinks = 0;
   //static const IconData tea_cup = IconData(0xf1a6, fontFamily: 'MaterialIcons');
@@ -58,21 +60,16 @@ class MyApp extends StatelessWidget {
                       controller: numController,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       maxLength: 2,
-                      onFieldSubmitted: (value){
-                      this._NumOfDrinks = int.parse(value);
+                      onFieldSubmitted: (value) {
+                        this._NumOfDrinks = int.parse(value);
                       },
-                      onChanged: (value){
+                      onChanged: (value) {
                         _NumOfDrinks = int.parse(value);
                       },
-                      onSaved: (value){
+                      onSaved: (value) {
                         _NumOfDrinks = int.parse(value!);
                       },
                       decoration: const InputDecoration(
-                        icon: Icon(
-                          tea_cup,
-                          color: Colors.white,
-                          size: 30,
-                        ),
                         labelText:
                             'Enter the number of drinks you want to calculate',
                         labelStyle: TextStyle(
@@ -99,7 +96,7 @@ class MyApp extends StatelessWidget {
                           backgroundColor:
                               MaterialStateProperty.all(Colors.white60),
                         ),
-                        onPressed: (){
+                        onPressed: () {
                           final _numDrinks = numController.text;
                           _NumOfDrinks = int.parse(_numDrinks);
                         },
@@ -120,6 +117,5 @@ class MyApp extends StatelessWidget {
         ],
       ),
     );
-
   }
 }
