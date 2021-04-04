@@ -3,8 +3,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/avd.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,12 +11,6 @@ void main() {
 class MyApp extends StatelessWidget {
   final _formkey = GlobalKey<FormState>();
   final numController = TextEditingController();
-  static const teaCupSVG = 'images/tea_cup.svg';
-  final Widget teaCup = SvgPicture.asset(
-    teaCupSVG,
-    color: Colors.white70,
-    semanticsLabel: 'tea cup',
-  );
 
   int _NumOfDrinks = 0;
   //static const IconData tea_cup = IconData(0xf1a6, fontFamily: 'MaterialIcons');
@@ -52,6 +44,7 @@ class MyApp extends StatelessWidget {
             ),
             body: SafeArea(
               child: Container(
+                padding: const EdgeInsets.all(30),
                 color: Colors.transparent,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,6 +63,8 @@ class MyApp extends StatelessWidget {
                         _NumOfDrinks = int.parse(value!);
                       },
                       decoration: const InputDecoration(
+                        icon: Icon(Icons.emoji_food_beverage_sharp,
+                            color: Colors.white70),
                         labelText:
                             'Enter the number of drinks you want to calculate',
                         labelStyle: TextStyle(
@@ -90,7 +85,7 @@ class MyApp extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 16.0, horizontal: 20.0),
+                          vertical: 14.0, horizontal: 20.0),
                       child: ElevatedButton(
                         style: ButtonStyle(
                           backgroundColor:
