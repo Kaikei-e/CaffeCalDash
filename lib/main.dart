@@ -14,12 +14,12 @@ class MyApp extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return MultiProvider(
-      provider: [
+      providers: [
         ChangeNotifierProvider<DrinkNumProvider>(
           create: (context) => DrinkNumProvider(),
         ),
       ],
-      child: GetMaterialApp(
+      child: MaterialApp(
         home: HomePage(),
       ),
     );
@@ -27,16 +27,21 @@ class MyApp extends StatelessWidget {
 }
 
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key key}) : super(key: key);
 
-  @override
+class HomePage extends StatelessWidget {
+  const HomePage({required Key key}) : super(key: key);
+
   _HomePageState createState() => _HomePageState();
 
 }
 
 
 class _HomePageState extends State<HomePage> with WidgetsBindingObserver{
+  @override
+  Widget build(BuildContext context){
+    final DrinkNumProvider drinkNum = MultiProvider()
+  }
+
   @override
   void initState() {
     super.initState();
@@ -51,6 +56,10 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver{
 
 
   @override
+
+}
+
+class DrinkNum extends ChangeNotifier{
 
 }
 
