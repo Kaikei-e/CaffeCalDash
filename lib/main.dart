@@ -18,7 +18,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
+    return MultiProvider(
+      provider: [
+        ChangeNotifierProvider<ClockProvider>(
+          create: (context) => ClockProvider(),
+        ),
+      ],
+      child: ,
       key: _formkey,
       title: 'CaffeCalDash',
       theme: ThemeData(
