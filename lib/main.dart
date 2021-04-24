@@ -89,7 +89,7 @@ class MyApp extends StatelessWidget {
                       child: ElevatedButton(
                         style: ButtonStyle(
                           backgroundColor:
-                              MaterialStateProperty.all(Colors.white60),
+                              MaterialStateProperty.all(Colors.white70),
                         ),
                         onPressed: () {
                           final _numDrinks = numController.text;
@@ -103,7 +103,20 @@ class MyApp extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Text('Number of drinks are $_NumOfDrinks'),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.white70,
+                      ),
+                      child: Text(
+                        'Number of drinks : $_NumOfDrinks',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black87,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
