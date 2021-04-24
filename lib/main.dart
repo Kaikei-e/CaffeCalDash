@@ -110,7 +110,7 @@ class MyApp extends StatelessWidget {
                         color: Colors.white70,
                       ),
                       child: Text(
-                        'Number of drinks are $_NumOfDrinks',
+                        'Number of drinks : $_NumOfDrinks',
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.black87,
