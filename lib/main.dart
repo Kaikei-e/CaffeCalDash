@@ -1,14 +1,20 @@
 import 'dart:html';
 import 'dart:ui';
 
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
+  MyApp({Key? key}) : super(key: key);
+
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -16,9 +22,29 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final _formkey = GlobalKey<FormState>();
   final numController = TextEditingController();
+  late TextEditingController _timeController;
+
+  String _valueTimeChanged = '';
+  String _valueToValidate = '';
 
   int _numOfDrinks = 0;
   //static const IconData tea_cup = IconData(0xf1a6, fontFamily: 'MaterialIcons');
+
+  @override
+  void initState() {
+    super.initState();
+    _timeController = TextEditingController(text: DateTime.now().toString());
+    _getValue();
+  }
+
+  Future<void> _getValue() async {
+    await Future.delayed(const Duration(seconds: 3), () {
+      setState(() {
+        //_initialValue = '2000-10-22 14:30';
+        _timeController.text = '2002-11-22';
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +56,15 @@ class _MyAppState extends State<MyApp> {
         primaryColor: Colors.blueGrey[100],
         accentColor: Colors.white,
       ),
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('en', ''),
+        const Locale('ja', ''),
+      ],
       home: Stack(
         children: <Widget>[
           new Container(
@@ -129,6 +164,13 @@ class _MyAppState extends State<MyApp> {
                         ),
                       ),
                     ),
+                    DateTimePicker(
+                      type: DateTimePickerType.dateTime,
+                      dateMask: 'yyyy/MM/dd - hh:mm',
+                      controller: _timeController,
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2100),
+                    )
                   ],
                 ),
               ),
