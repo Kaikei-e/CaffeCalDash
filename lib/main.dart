@@ -3,71 +3,17 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  //static const IconData tea_cup = IconData(0xf1a6, fontFamily: 'MaterialIcons');
-
-  Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<DrinkNumProvider>(
-          create: (context) => DrinkNumProvider(),
-        ),
-      ],
-      child: MaterialApp(
-        home: HomePage(),
-      ),
-    );
-  }
-}
-
-
-
-class HomePage extends StatelessWidget {
-  const HomePage({required Key key}) : super(key: key);
-
-  _HomePageState createState() => _HomePageState();
-
-}
-
-
-class _HomePageState extends State<HomePage> with WidgetsBindingObserver{
-  @override
-  Widget build(BuildContext context){
-    final DrinkNumProvider drinkNum = MultiProvider()
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addObserver(this);
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-
-
-  @override
-
-}
-
-class DrinkNum extends ChangeNotifier{
-
-}
-
-
   final _formkey = GlobalKey<FormState>();
   final numController = TextEditingController();
 
   int _NumOfDrinks = 0;
+  //static const IconData tea_cup = IconData(0xf1a6, fontFamily: 'MaterialIcons');
 
   @override
   Widget build(BuildContext context) {
@@ -176,8 +122,8 @@ class DrinkNum extends ChangeNotifier{
               ),
             ),
           ),
-        ),
+        ],
       ),
-    ),
-  ],
+    );
+  }
 }
