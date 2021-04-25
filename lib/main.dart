@@ -30,13 +30,15 @@ class _MyAppState extends State<MyApp> {
   int _numOfDrinks = 0;
   //static const IconData tea_cup = IconData(0xf1a6, fontFamily: 'MaterialIcons');
 
+
   @override
   void initState() {
     super.initState();
     _timeController = TextEditingController(text: DateTime.now().toString());
-    _getValue();
+    //_getValue();
   }
 
+/*
   Future<void> _getValue() async {
     await Future.delayed(const Duration(seconds: 3), () {
       setState(() {
@@ -45,6 +47,8 @@ class _MyAppState extends State<MyApp> {
       });
     });
   }
+*/
+
 
   @override
   Widget build(BuildContext context) {
@@ -164,12 +168,37 @@ class _MyAppState extends State<MyApp> {
                         ),
                       ),
                     ),
+                    ListView.builder(
+                      itemBuilder: (BuildContext context, int index){
+                        if (index >= list.length)
+                      }),
+
+
+
+
+                      
                     DateTimePicker(
                       type: DateTimePickerType.dateTime,
                       dateMask: 'yyyy/MM/dd - hh:mm',
                       controller: _timeController,
                       firstDate: DateTime(2000),
                       lastDate: DateTime(2100),
+                      icon: Icon(Icons.event),
+                      dateLabelText: 'Date',
+                      timeLabelText: 'Hour',
+                      selectableDayPredicate: (date) {
+                        if (date.weekday == 6 || date.weekday == 7) {
+                          return false;
+                        }
+                        return true;
+                      },
+                      onChanged: (val) =>
+                          setState(() => _valueTimeChanged = val),
+                      validator: (val) {
+                        setState(() {
+                          _valueToValidate = val ?? '';
+                        });
+                      },
                     )
                   ],
                 ),
