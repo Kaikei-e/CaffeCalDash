@@ -8,11 +8,16 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   final _formkey = GlobalKey<FormState>();
   final numController = TextEditingController();
 
-  int _NumOfDrinks = 0;
+  int _numOfDrinks = 0;
   //static const IconData tea_cup = IconData(0xf1a6, fontFamily: 'MaterialIcons');
 
   @override
@@ -54,13 +59,19 @@ class MyApp extends StatelessWidget {
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       maxLength: 2,
                       onFieldSubmitted: (value) {
-                        this._NumOfDrinks = int.parse(value);
+                        setState(() {
+                          this._numOfDrinks = int.parse(value);
+                        });
                       },
                       onChanged: (value) {
-                        _NumOfDrinks = int.parse(value);
+                        setState(() {
+                          this._numOfDrinks = int.parse(value);
+                        });
                       },
                       onSaved: (value) {
-                        _NumOfDrinks = int.parse(value!);
+                        setState(() {
+                          this._numOfDrinks = int.parse(value!);
+                        });
                       },
                       decoration: const InputDecoration(
                         icon: Icon(Icons.emoji_food_beverage_sharp,
@@ -85,7 +96,7 @@ class MyApp extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 14.0, horizontal: 20.0),
+                          vertical: 18.0, horizontal: 4.0),
                       child: ElevatedButton(
                         style: ButtonStyle(
                           backgroundColor:
@@ -93,24 +104,25 @@ class MyApp extends StatelessWidget {
                         ),
                         onPressed: () {
                           final _numDrinks = numController.text;
-                          _NumOfDrinks = int.parse(_numDrinks);
+                          this._numOfDrinks = int.parse(_numDrinks);
                         },
                         child: Text(
                           'Submit',
                           style: TextStyle(
+                            fontSize: 20,
                             color: Colors.black87,
                           ),
                         ),
                       ),
                     ),
                     Container(
+                      padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(5),
+                        borderRadius: BorderRadius.circular(4),
                         color: Colors.white70,
                       ),
                       child: Text(
-                        'Number of drinks : $_NumOfDrinks',
+                        'Number of drinks : $_numOfDrinks',
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.black87,
