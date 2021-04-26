@@ -28,7 +28,6 @@ class _MyAppState extends State<MyApp> {
     DateTime.now().toString(),
   ];
 
-
   String _valueTimeChanged = '';
   String _valueToValidate = '';
 
@@ -38,9 +37,11 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    _numOfDrinks = 1;
     _timeController = TextEditingController(text: DateTime.now().toString());
     //_getValue();
   }
+
 
 
 /*
@@ -203,14 +204,20 @@ class _MyAppState extends State<MyApp> {
                       ),
                     ),
                     Expanded(
+                      child: Card(
+
                       child: ListView.builder(
                           itemCount: list.length,
                           itemBuilder: (BuildContext context, int index) {
-                            if (index >= list.length) {
+
+
+                            var listCaffe = List.generate(_numOfDrinks, (i) => i + 1);
+                            if (index >= listCaffe.length) {
                               list.addAll([]);
                             }
-                            return _datetimeForm(list[index]);
-                          }),
+                            return _datetimeForm(listCaffe[index]);
+                          }),),
+
                     ),
                   ],
                 ),
