@@ -185,8 +185,9 @@ class _MyAppState extends State<MyApp> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.all(10),
-                      padding: const EdgeInsets.all(5),
+                      margin: const EdgeInsets.all(10),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 18.0, horizontal: 10.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
                         color: Colors.white70.withOpacity(0.5),
@@ -203,8 +204,6 @@ class _MyAppState extends State<MyApp> {
                     Expanded(
                       child: Card(
                         color: Colors.white70.withOpacity(0.5),
-                        margin: EdgeInsets.all(10),
-
                       child: ListView.builder(
                         itemBuilder: (BuildContext context, int index) {
                           var listCaffe =
