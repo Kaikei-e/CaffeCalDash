@@ -24,12 +24,16 @@ class _MyAppState extends State<MyApp> {
   final numController = TextEditingController();
   late TextEditingController _timeController;
 
+  var list = [
+    DateTime.now().toString(),
+  ];
+
+
   String _valueTimeChanged = '';
   String _valueToValidate = '';
 
-  int _numOfDrinks = 0;
+  int _numOfDrinks = 1;
   //static const IconData tea_cup = IconData(0xf1a6, fontFamily: 'MaterialIcons');
-
 
   @override
   void initState() {
@@ -37,6 +41,7 @@ class _MyAppState extends State<MyApp> {
     _timeController = TextEditingController(text: DateTime.now().toString());
     //_getValue();
   }
+
 
 /*
   Future<void> _getValue() async {
@@ -48,7 +53,36 @@ class _MyAppState extends State<MyApp> {
     });
   }
 */
-
+  @override
+  Widget _datetimeForm(String title) {
+    return Container(
+      decoration: new BoxDecoration(
+          border:
+              new Border(bottom: BorderSide(width: 1, color: Colors.black87))),
+      child: DateTimePicker(
+        type: DateTimePickerType.dateTime,
+        dateMask: 'yyyy/MM/dd - hh:mm',
+        controller: _timeController,
+        firstDate: DateTime(2000),
+        lastDate: DateTime(2100),
+        icon: Icon(Icons.event),
+        dateLabelText: 'Date',
+        timeLabelText: 'Hour',
+        selectableDayPredicate: (date) {
+          if (date.weekday == 6 || date.weekday == 7) {
+            return false;
+          }
+          return true;
+        },
+        onChanged: (val) => setState(() => _valueTimeChanged = val),
+        validator: (val) {
+          setState(() {
+            _valueToValidate = val ?? '';
+          });
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -168,38 +202,16 @@ class _MyAppState extends State<MyApp> {
                         ),
                       ),
                     ),
-                    ListView.builder(
-                      itemBuilder: (BuildContext context, int index){
-                        if (index >= list.length)
-                      }),
-
-
-
-
-                      
-                    DateTimePicker(
-                      type: DateTimePickerType.dateTime,
-                      dateMask: 'yyyy/MM/dd - hh:mm',
-                      controller: _timeController,
-                      firstDate: DateTime(2000),
-                      lastDate: DateTime(2100),
-                      icon: Icon(Icons.event),
-                      dateLabelText: 'Date',
-                      timeLabelText: 'Hour',
-                      selectableDayPredicate: (date) {
-                        if (date.weekday == 6 || date.weekday == 7) {
-                          return false;
-                        }
-                        return true;
-                      },
-                      onChanged: (val) =>
-                          setState(() => _valueTimeChanged = val),
-                      validator: (val) {
-                        setState(() {
-                          _valueToValidate = val ?? '';
-                        });
-                      },
-                    )
+                    Expanded(
+                      child: ListView.builder(
+                          itemCount: list.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            if (index >= list.length) {
+                              list.addAll([]);
+                            }
+                            return _datetimeForm(list[index]);
+                          }),
+                    ),
                   ],
                 ),
               ),
