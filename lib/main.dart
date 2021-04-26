@@ -54,8 +54,7 @@ class _MyAppState extends State<MyApp> {
     });
   }
 */
-  @override
-  Widget _datetimeForm(String title) {
+  Widget _datetimeForm() {
     return Container(
       decoration: new BoxDecoration(
           border:
@@ -207,16 +206,17 @@ class _MyAppState extends State<MyApp> {
                       child: Card(
 
                       child: ListView.builder(
-                          itemCount: list.length,
                           itemBuilder: (BuildContext context, int index) {
-
 
                             var listCaffe = List.generate(_numOfDrinks, (i) => i + 1);
                             if (index >= listCaffe.length) {
                               list.addAll([]);
                             }
-                            return _datetimeForm(listCaffe[index]);
-                          }),),
+                            return _datetimeForm();
+                          },
+                          itemCount: _numOfDrinks,
+                          ),
+                          ),
 
                     ),
                   ],
