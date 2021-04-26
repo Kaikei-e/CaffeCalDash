@@ -39,27 +39,29 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     _numOfDrinks = 1;
     _timeController = TextEditingController(text: DateTime.now().toString());
-    //_getValue();
+
+    _getValue();
   }
 
-
-
-/*
   Future<void> _getValue() async {
     await Future.delayed(const Duration(seconds: 3), () {
       setState(() {
         //_initialValue = '2000-10-22 14:30';
-        _timeController.text = '2002-11-22';
+        _timeController.text = DateTime.now().toString();
       });
     });
   }
-*/
+
   Widget _datetimeForm() {
     return Container(
+      margin: EdgeInsets.all(10),
       decoration: new BoxDecoration(
-          border:
-              new Border(bottom: BorderSide(width: 1, color: Colors.black87))),
+        color: Colors.brown[100],
+        border: new Border(bottom: BorderSide(width: 2, color: Colors.black87)),
+        borderRadius: BorderRadius.circular(5),
+      ),
       child: DateTimePicker(
+        style: TextStyle(color: Colors.black87, fontSize: 18),
         type: DateTimePickerType.dateTime,
         dateMask: 'yyyy/MM/dd - hh:mm',
         controller: _timeController,
@@ -68,12 +70,6 @@ class _MyAppState extends State<MyApp> {
         icon: Icon(Icons.event),
         dateLabelText: 'Date',
         timeLabelText: 'Hour',
-        selectableDayPredicate: (date) {
-          if (date.weekday == 6 || date.weekday == 7) {
-            return false;
-          }
-          return true;
-        },
         onChanged: (val) => setState(() => _valueTimeChanged = val),
         validator: (val) {
           setState(() {
@@ -116,7 +112,7 @@ class _MyAppState extends State<MyApp> {
           Scaffold(
             backgroundColor: Colors.transparent,
             appBar: new AppBar(
-              title: Text("CaffeCalDash"),
+              title: Text("CaffeCalDash", style: TextStyle(fontWeight: FontWeight.bold),),
               backgroundColor: Colors.brown[100]!.withOpacity(0.5),
               elevation: 0.0,
             ),
@@ -169,7 +165,7 @@ class _MyAppState extends State<MyApp> {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 18.0, horizontal: 4.0),
+                          vertical: 18.0, horizontal: 10.0),
                       child: ElevatedButton(
                         style: ButtonStyle(
                           backgroundColor:
@@ -189,7 +185,9 @@ class _MyAppState extends State<MyApp> {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.all(5),
+                      margin: const EdgeInsets.all(10),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 18.0, horizontal: 10.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
                         color: Colors.white70,
@@ -198,26 +196,26 @@ class _MyAppState extends State<MyApp> {
                         'Number of drinks : $_numOfDrinks',
                         style: TextStyle(
                           fontSize: 20,
+                          fontWeight: FontWeight.bold,
                           color: Colors.black87,
                         ),
                       ),
                     ),
                     Expanded(
                       child: Card(
-
+                        color: Colors.white70.withOpacity(0.5),
                       child: ListView.builder(
-                          itemBuilder: (BuildContext context, int index) {
-
-                            var listCaffe = List.generate(_numOfDrinks, (i) => i + 1);
-                            if (index >= listCaffe.length) {
-                              list.addAll([]);
-                            }
-                            return _datetimeForm();
-                          },
-                          itemCount: _numOfDrinks,
-                          ),
-                          ),
-
+                        itemBuilder: (BuildContext context, int index) {
+                          var listCaffe =
+                              List.generate(_numOfDrinks, (i) => i + 1);
+                          if (index >= listCaffe.length) {
+                            list.addAll([]);
+                          }
+                          return _datetimeForm();
+                        },
+                        itemCount: _numOfDrinks,
+                      ),
+                      )
                     ),
                   ],
                 ),
