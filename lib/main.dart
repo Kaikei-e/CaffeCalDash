@@ -56,6 +56,7 @@ class _MyAppState extends State<MyApp> {
 */
   Widget _datetimeForm() {
     return Container(
+      margin: EdgeInsets.all(10),
       decoration: new BoxDecoration(
           border:
               new Border(bottom: BorderSide(width: 1, color: Colors.black87))),
@@ -68,12 +69,6 @@ class _MyAppState extends State<MyApp> {
         icon: Icon(Icons.event),
         dateLabelText: 'Date',
         timeLabelText: 'Hour',
-        selectableDayPredicate: (date) {
-          if (date.weekday == 6 || date.weekday == 7) {
-            return false;
-          }
-          return true;
-        },
         onChanged: (val) => setState(() => _valueTimeChanged = val),
         validator: (val) {
           setState(() {
@@ -169,7 +164,7 @@ class _MyAppState extends State<MyApp> {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 18.0, horizontal: 4.0),
+                          vertical: 18.0, horizontal: 10.0),
                       child: ElevatedButton(
                         style: ButtonStyle(
                           backgroundColor:
@@ -189,21 +184,25 @@ class _MyAppState extends State<MyApp> {
                       ),
                     ),
                     Container(
+                      margin: EdgeInsets.all(10),
                       padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
-                        color: Colors.white70,
+                        color: Colors.white70.withOpacity(0.5),
                       ),
                       child: Text(
                         'Number of drinks : $_numOfDrinks',
                         style: TextStyle(
                           fontSize: 20,
+                          fontWeight: FontWeight.bold,
                           color: Colors.black87,
                         ),
                       ),
                     ),
                     Expanded(
                       child: Card(
+                        color: Colors.white70.withOpacity(0.5),
+                        margin: EdgeInsets.all(10),
 
                       child: ListView.builder(
                           itemBuilder: (BuildContext context, int index) {
