@@ -60,22 +60,10 @@ class _MyAppState extends State<MyApp> {
         border: new Border(bottom: BorderSide(width: 2, color: Colors.black87)),
         borderRadius: BorderRadius.circular(5),
       ),
-      child: DateTimePicker(
-        style: TextStyle(color: Colors.black87, fontSize: 18),
-        type: DateTimePickerType.dateTime,
-        dateMask: 'yyyy/MM/dd - hh:mm',
-        controller: _timeController,
-        firstDate: DateTime(2000),
-        lastDate: DateTime(2100),
-        icon: Icon(Icons.event),
-        dateLabelText: 'Date',
-        timeLabelText: 'Hour',
-        onChanged: (val) => setState(() => _valueTimeChanged = val),
-        validator: (val) {
-          setState(() {
-            _valueToValidate = val ?? '';
-          });
-        },
+      child: Column(
+        children: <Widget>[TextButton(onPressed: () {
+
+        }, child: child)],
       ),
     );
   }
@@ -112,7 +100,10 @@ class _MyAppState extends State<MyApp> {
           Scaffold(
             backgroundColor: Colors.transparent,
             appBar: new AppBar(
-              title: Text("CaffeCalDash", style: TextStyle(fontWeight: FontWeight.bold),),
+              title: Text(
+                "CaffeCalDash",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
               backgroundColor: Colors.brown[100]!.withOpacity(0.5),
               elevation: 0.0,
             ),
@@ -185,9 +176,8 @@ class _MyAppState extends State<MyApp> {
                       ),
                     ),
                     Container(
-                      margin: const EdgeInsets.all(10),
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 18.0, horizontal: 10.0),
+                      margin: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
                         color: Colors.white70.withOpacity(0.5),
@@ -202,8 +192,9 @@ class _MyAppState extends State<MyApp> {
                       ),
                     ),
                     Expanded(
-                      child: Card(
-                        color: Colors.white70.withOpacity(0.5),
+                        child: Card(
+                      color: Colors.white70.withOpacity(0.5),
+                      margin: EdgeInsets.all(10),
                       child: ListView.builder(
                         itemBuilder: (BuildContext context, int index) {
                           var listCaffe =
@@ -215,8 +206,7 @@ class _MyAppState extends State<MyApp> {
                         },
                         itemCount: _numOfDrinks,
                       ),
-                      )
-                    ),
+                    )),
                   ],
                 ),
               ),
