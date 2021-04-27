@@ -54,34 +54,46 @@ class _MyAppState extends State<MyApp> {
   }
 
   Widget _datetimeForm() {
-    return Container(
-      margin: EdgeInsets.all(10),
-      decoration: new BoxDecoration(
-        color: Colors.brown[100],
-        border: new Border(bottom: BorderSide(width: 2, color: Colors.black87)),
-        borderRadius: BorderRadius.circular(5),
+    return Row(children: <Widget>[
+      Container(
+        margin: EdgeInsets.all(10),
+        decoration: new BoxDecoration(
+          border: new Border(bottom: BorderSide(width: 2)),
+          borderRadius: BorderRadius.circular(5),
+          color: Colors.brown[100]!.withOpacity(0.7),
+        ),
+        child: Row(
+          children: <Widget>[
+            TextButton(
+                onPressed: () {
+                  DatePicker.showDateTimePicker(context,
+                      showTitleActions: true,
+                      minTime: DateTime(2021, 1, 1, 0, 0),
+                      maxTime: DateTime(2022, 12, 31, 0, 0),
+                      theme: DatePickerTheme(
+                          headerColor: Colors.orange,
+                          backgroundColor: Colors.blue,
+                          itemStyle: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),
+                          doneStyle:
+                              TextStyle(color: Colors.white, fontSize: 16)),
+                      onChanged: (date) {
+                    print('change $date in time zone ' +
+                        date.timeZoneOffset.inHours.toString());
+                  }, onConfirm: (date) {
+                    print('confirm $date');
+                  }, locale: LocaleType.zh);
+                },
+                child: Text(
+                  'show date time picker (Chinese)',
+                  style: TextStyle(color: Colors.blue),
+                )),
+          ],
+        ),
       ),
-      child: Column(
-        children: <Widget>[
-          TextButton(
-              onPressed: () {
-                DatePicker.showDateTimePicker(context,
-                    showTitleActions: true,
-                    minTime: DateTime(2021, 1, 1, 0, 0),
-                    maxTime: DateTime(2022, 12, 31, 0, 0), onChanged: (date) {
-                  print('change $date in time zone ' +
-                      date.timeZoneOffset.inHours.toString());
-                }, onConfirm: (date) {
-                  print('confirm $date');
-                }, locale: LocaleType.zh);
-              },
-              child: Text(
-                'show date time picker (Chinese)',
-                style: TextStyle(color: Colors.blue),
-              )),
-        ],
-      ),
-    );
+    ]);
   }
 
   @override
