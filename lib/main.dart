@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
@@ -61,9 +62,24 @@ class _MyAppState extends State<MyApp> {
         borderRadius: BorderRadius.circular(5),
       ),
       child: Column(
-        children: <Widget>[TextButton(onPressed: () {
-
-        }, child: child)],
+        children: <Widget>[
+          TextButton(
+              onPressed: () {
+                DatePicker.showDateTimePicker(context,
+                    showTitleActions: true,
+                    minTime: DateTime(2021, 1, 1, 0, 0),
+                    maxTime: DateTime(2022, 12, 31, 0, 0), onChanged: (date) {
+                  print('change $date in time zone ' +
+                      date.timeZoneOffset.inHours.toString());
+                }, onConfirm: (date) {
+                  print('confirm $date');
+                }, locale: LocaleType.zh);
+              },
+              child: Text(
+                'show date time picker (Chinese)',
+                style: TextStyle(color: Colors.blue),
+              )),
+        ],
       ),
     );
   }
