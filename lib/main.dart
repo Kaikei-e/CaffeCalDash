@@ -1,13 +1,11 @@
-import 'dart:html';
 import 'dart:ui';
 
-import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
@@ -16,6 +14,8 @@ void main() {
 
 class MyApp extends StatefulWidget {
   MyApp({Key? key}) : super(key: key);
+
+
 
   @override
   _MyAppState createState() => _MyAppState();
@@ -35,6 +35,8 @@ class _MyAppState extends State<MyApp> {
 
   int _numOfDrinks = 1;
   //static const IconData tea_cup = IconData(0xf1a6, fontFamily: 'MaterialIcons');
+
+
 
   @override
   void initState() {
@@ -58,11 +60,18 @@ class _MyAppState extends State<MyApp> {
   }
 
   Widget _datetimeForm(BuildContext context) {
+
+
+
     return ColoredBox(
         color: Colors.brown[100]!.withOpacity(0.7),
         child: Container(
+          decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4),
+
+          ),
           height: 40,
-          margin: EdgeInsets.all(7.5),
+          margin: EdgeInsets.all(10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
@@ -73,8 +82,8 @@ class _MyAppState extends State<MyApp> {
                         minTime: DateTime(2021, 1, 1, 0, 0),
                         maxTime: DateTime(2022, 12, 31, 0, 0),
                         theme: DatePickerTheme(
-                            headerColor: Colors.orange,
-                            backgroundColor: Colors.blue,
+                            headerColor: Colors.brown[200]!,
+                            backgroundColor: Colors.lightGreen[200]!,
                             itemStyle: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -86,22 +95,20 @@ class _MyAppState extends State<MyApp> {
                           date.timeZoneOffset.inHours.toString());
                     }, onConfirm: (date) {
                       print('confirm $date');
-                    }, locale: LocaleType.zh);
+                    }, locale: LocaleType.en);
                   },
                   child: Text(
-                    'show date time picker (Chinese)',
-                    style: TextStyle(color: Colors.blue),
+                    _timeController.text,
+                    style: TextStyle(color: Colors.black87),
                   )),
               Expanded(
                 child: Container(
-                  margin: EdgeInsets.all(10),
-                  //height: MediaQuery.of(context).size.height * 0.3,
+                  margin: EdgeInsets.all(5),
                   decoration: new BoxDecoration(
                     border: new Border(bottom: BorderSide(width: 2)),
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  child: Text(
-                    _timeController.toString(),
+                  child: Text("this is test",
                     style: TextStyle(color: Colors.red, fontSize: 18),
                   ),
                 ),
@@ -122,6 +129,7 @@ class _MyAppState extends State<MyApp> {
         accentColor: Colors.white,
       ),
       localizationsDelegates: [
+        const SwitchLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
@@ -152,7 +160,7 @@ class _MyAppState extends State<MyApp> {
             ),
             body: SafeArea(
               child: Container(
-                padding: const EdgeInsets.all(30),
+                padding: const EdgeInsets.all(10),
                 color: Colors.transparent,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -199,7 +207,7 @@ class _MyAppState extends State<MyApp> {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 18.0, horizontal: 10.0),
+                          vertical: 5.0, horizontal: 5.0),
                       child: ElevatedButton(
                         style: ButtonStyle(
                           backgroundColor:
@@ -219,7 +227,7 @@ class _MyAppState extends State<MyApp> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.all(10),
+                      margin: EdgeInsets.all(5),
                       padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
@@ -237,7 +245,7 @@ class _MyAppState extends State<MyApp> {
                     Expanded(
                         child: Card(
                       color: Colors.white70.withOpacity(0.5),
-                      margin: EdgeInsets.all(10),
+                      margin: EdgeInsets.all(5),
                       child: Scrollbar(
                         child: ListView.builder(
                           itemBuilder: (BuildContext context, int index) {
@@ -261,4 +269,42 @@ class _MyAppState extends State<MyApp> {
       ),
     );
   }
+}
+
+
+class Localized {
+  Localized(this.locale);
+
+  final Locale locale;
+
+  static Localized? of(BuildContext context) {
+    return Localizations.of<Localized>(context, Localized);
+  }
+
+  static Map<String, Map<String, String>> _localizedValues = {
+    'en': {
+      'title': 'CaffeCalDash: A simple caffeine calculator',
+    },
+    'ja': {
+      'title': 'CaffeCalDash: カフェイン計算機',
+    },
+  };
+
+  String? get title {
+    return _localizedValues[locale.languageCode]!['title'];
+  }
+}
+
+class SwitchLocalizationsDelegate extends LocalizationsDelegate<Localized> {
+  const SwitchLocalizationsDelegate();
+
+  @override
+  bool isSupported(Locale locale) => ['en', 'ja'].contains(locale.languageCode);
+
+  @override
+  Future<Localized> load(Locale locale) async => Localized(locale);
+
+
+  @override
+  bool shouldReload(SwitchLocalizationsDelegate old) => false;
 }
