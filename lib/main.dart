@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
@@ -39,8 +40,9 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     _numOfDrinks = 1;
-    _timeController = TextEditingController(text: DateTime.now().toString());
-
+    var _dateNow = DateTime.now();
+    _timeController = TextEditingController(
+        text: DateFormat('yyyy/MM/dd(E) HH:mm:ss').format(_dateNow).toString());
     _getValue();
   }
 
@@ -48,21 +50,37 @@ class _MyAppState extends State<MyApp> {
     await Future.delayed(const Duration(seconds: 3), () {
       setState(() {
         //_initialValue = '2000-10-22 14:30';
-        _timeController.text = DateTime.now().toString();
+        _timeController.text = DateFormat('yyyy/MM/dd(E) HH:mm:ss')
+            .format(DateTime.now())
+            .toString();
       });
     });
   }
 
-  Widget _datetimeForm() {
+  Widget _datetimeForm(BuildContext context) {
+    return Container(
+        height: 50,
+        margin: EdgeInsets.all(10),
+        color: Colors.red,
+        child: Center(
+          child: Text(
+            "This is test",
+            style: TextStyle(fontSize: 18),
+          ),
+        ));
+  }
+
+  Widget _datetimeForms() {
     return Row(children: <Widget>[
       Container(
         margin: EdgeInsets.all(10),
         decoration: new BoxDecoration(
+          color: Colors.brown[100]!.withOpacity(0.7),
           border: new Border(bottom: BorderSide(width: 2)),
           borderRadius: BorderRadius.circular(5),
-          color: Colors.brown[100]!.withOpacity(0.7),
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             TextButton(
                 onPressed: () {
@@ -91,6 +109,21 @@ class _MyAppState extends State<MyApp> {
                   style: TextStyle(color: Colors.blue),
                 )),
           ],
+        ),
+      ),
+      Expanded(
+        child: Container(
+          margin: EdgeInsets.all(10),
+          //height: MediaQuery.of(context).size.height * 0.3,
+          decoration: new BoxDecoration(
+            color: Colors.brown[100]!.withOpacity(0.7),
+            border: new Border(bottom: BorderSide(width: 2)),
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: Text(
+            _timeController.toString(),
+            style: TextStyle(color: Colors.red, fontSize: 18),
+          ),
         ),
       ),
     ]);
@@ -223,16 +256,18 @@ class _MyAppState extends State<MyApp> {
                         child: Card(
                       color: Colors.white70.withOpacity(0.5),
                       margin: EdgeInsets.all(10),
-                      child: ListView.builder(
-                        itemBuilder: (BuildContext context, int index) {
-                          var listCaffe =
-                              List.generate(_numOfDrinks, (i) => i + 1);
-                          if (index >= listCaffe.length) {
-                            list.addAll([]);
-                          }
-                          return _datetimeForm();
-                        },
-                        itemCount: _numOfDrinks,
+                      child: Scrollbar(
+                        child: ListView.builder(
+                          itemBuilder: (BuildContext context, int index) {
+                            var listCaffe =
+                                List.generate(_numOfDrinks, (i) => i + 1);
+                            if (index >= listCaffe.length) {
+                              list.addAll([]);
+                            }
+                            return _datetimeForm(context);
+                          },
+                          itemCount: _numOfDrinks,
+                        ),
                       ),
                     )),
                   ],
