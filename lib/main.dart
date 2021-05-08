@@ -15,8 +15,6 @@ void main() {
 class MyApp extends StatefulWidget {
   MyApp({Key? key}) : super(key: key);
 
-
-
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -35,8 +33,6 @@ class _MyAppState extends State<MyApp> {
 
   int _numOfDrinks = 1;
   //static const IconData tea_cup = IconData(0xf1a6, fontFamily: 'MaterialIcons');
-
-
 
   @override
   void initState() {
@@ -60,15 +56,11 @@ class _MyAppState extends State<MyApp> {
   }
 
   Widget _datetimeForm(BuildContext context) {
-
-
-
     return ColoredBox(
         color: Colors.brown[100]!.withOpacity(0.7),
         child: Container(
           decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
-
+            borderRadius: BorderRadius.circular(4),
           ),
           height: 40,
           margin: EdgeInsets.all(10),
@@ -89,11 +81,17 @@ class _MyAppState extends State<MyApp> {
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18),
                             doneStyle:
-                                TextStyle(color: Colors.white, fontSize: 16)),
+                                TextStyle(color: Colors.black87, fontSize: 16)),
                         onChanged: (date) {
                       print('change $date in time zone ' +
                           date.timeZoneOffset.inHours.toString());
+                      setState(() {
+                        _timeController.text = '$date';
+                      });
                     }, onConfirm: (date) {
+                      setState(() {
+                        _timeController.text = '$date';
+                      });
                       print('confirm $date');
                     }, locale: LocaleType.en);
                   },
@@ -106,9 +104,9 @@ class _MyAppState extends State<MyApp> {
                   margin: EdgeInsets.all(5),
                   decoration: new BoxDecoration(
                     border: new Border(bottom: BorderSide(width: 2)),
-                    borderRadius: BorderRadius.circular(5),
                   ),
-                  child: Text("this is test",
+                  child: Text(
+                    "this is test",
                     style: TextStyle(color: Colors.red, fontSize: 18),
                   ),
                 ),
@@ -271,7 +269,6 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-
 class Localized {
   Localized(this.locale);
 
@@ -303,7 +300,6 @@ class SwitchLocalizationsDelegate extends LocalizationsDelegate<Localized> {
 
   @override
   Future<Localized> load(Locale locale) async => Localized(locale);
-
 
   @override
   bool shouldReload(SwitchLocalizationsDelegate old) => false;
