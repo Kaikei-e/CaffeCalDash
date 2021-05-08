@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
     _numOfDrinks = 1;
     var _dateNow = DateTime.now();
     _timeController = TextEditingController(
-        text: DateFormat('yyyy/MM/dd(E) HH:mm:ss').format(_dateNow).toString());
+        text: DateFormat('yyyy/MM/dd(E) HH:mm').format(_dateNow).toString());
     _getValue();
   }
 
@@ -48,9 +48,8 @@ class _MyAppState extends State<MyApp> {
     await Future.delayed(const Duration(seconds: 3), () {
       setState(() {
         //_initialValue = '2000-10-22 14:30';
-        _timeController.text = DateFormat('yyyy/MM/dd(E) HH:mm:ss')
-            .format(DateTime.now())
-            .toString();
+        _timeController.text =
+            DateFormat('yyyy/MM/dd(E) HH:mm').format(DateTime.now()).toString();
       });
     });
   }
@@ -86,10 +85,12 @@ class _MyAppState extends State<MyApp> {
                       print('change $date in time zone ' +
                           date.timeZoneOffset.inHours.toString());
                       setState(() {
+                        DateFormat('yyyy/MM/dd(E) HH:mm:ss').format(date);
                         _timeController.text = '$date';
                       });
                     }, onConfirm: (date) {
                       setState(() {
+                        DateFormat('yyyy/MM/dd(E) HH:mm:ss').format(date);
                         _timeController.text = '$date';
                       });
                       print('confirm $date');
