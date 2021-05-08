@@ -24,6 +24,8 @@ class _MyAppState extends State<MyApp> {
   final numController = TextEditingController();
   late TextEditingController _timeController;
 
+  List<String> caffeDate = [];
+
   var list = [
     DateTime.now().toString(),
   ];
@@ -54,7 +56,10 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  Widget _datetimeForm(BuildContext context) {
+  Widget _datetimeForm(BuildContext context, int listCaffeIndex) {
+    listCaffeIndex = listCaffeIndex - 1;
+    caffeDate.add(_timeController.text);
+
     return ColoredBox(
         color: Colors.brown[100]!.withOpacity(0.7),
         child: Container(
@@ -86,18 +91,18 @@ class _MyAppState extends State<MyApp> {
                           date.timeZoneOffset.inHours.toString());
                       setState(() {
                         DateFormat('yyyy/MM/dd(E) HH:mm:ss').format(date);
-                        _timeController.text = '$date';
+                        caffeDate[listCaffeIndex] = '$date';
                       });
                     }, onConfirm: (date) {
                       setState(() {
                         DateFormat('yyyy/MM/dd(E) HH:mm:ss').format(date);
-                        _timeController.text = '$date';
+                        caffeDate[listCaffeIndex] = '$date';
                       });
                       print('confirm $date');
                     }, locale: LocaleType.en);
                   },
                   child: Text(
-                    _timeController.text,
+                    caffeDate[listCaffeIndex],
                     style: TextStyle(color: Colors.black87),
                   )),
               Expanded(
@@ -252,8 +257,10 @@ class _MyAppState extends State<MyApp> {
                                 List.generate(_numOfDrinks, (i) => i + 1);
                             if (index >= listCaffe.length) {
                               list.addAll([]);
+
+                              caffeDate.clear();
                             }
-                            return _datetimeForm(context);
+                            return _datetimeForm(context, listCaffe[index]);
                           },
                           itemCount: _numOfDrinks,
                         ),
