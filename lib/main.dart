@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
 
   int _numOfDrinks = 1;
   int _compareNumDrinks = 1;
-  //static const IconData tea_cup = IconData(0xf1a6, fontFamily: 'MaterialIcons');
+  String dropDownValue = '1';
 
   @override
   void initState() {
@@ -91,12 +91,14 @@ class _MyAppState extends State<MyApp> {
                       print('change $date in time zone ' +
                           date.timeZoneOffset.inHours.toString());
                       setState(() {
-                        String _dateFormatted = DateFormat('yyyy/MM/dd(E) HH:mm').format(date);
+                        String _dateFormatted =
+                            DateFormat('yyyy/MM/dd(E) HH:mm').format(date);
                         caffeDate[_listCaffeIndex] = _dateFormatted;
                       });
                     }, onConfirm: (date) {
                       setState(() {
-                        String _dateFormatted = DateFormat('yyyy/MM/dd(E) HH:mm').format(date);
+                        String _dateFormatted =
+                            DateFormat('yyyy/MM/dd(E) HH:mm').format(date);
                         caffeDate[_listCaffeIndex] = _dateFormatted;
                       });
                       print('confirm $date');
@@ -109,15 +111,36 @@ class _MyAppState extends State<MyApp> {
               Expanded(
                 child: Container(
                   margin: EdgeInsets.all(5),
+                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                   decoration: new BoxDecoration(
                     border: new Border(bottom: BorderSide(width: 2)),
                   ),
                   child: Text(
-                    "this is test",
-                    style: TextStyle(color: Colors.red, fontSize: 18),
+                    "Method: ",
+                    style: TextStyle(color: Colors.black87, fontSize: 18),
                   ),
                 ),
               ),
+              DropdownButton<String>(
+                value: dropDownValue,
+                icon: const Icon(Icons.arrow_circle_down_outlined),
+                iconSize: 22,
+                elevation: 16,
+                style: const TextStyle(color: Colors.brown, fontSize: 18),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    dropDownValue = newValue!;
+                  });
+                },
+                items: <String>['1', '2']
+                    .map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+              ),
+              
             ],
           ),
         ));
@@ -184,7 +207,6 @@ class _MyAppState extends State<MyApp> {
                         setState(() {
                           this._numOfDrinks = int.parse(value);
                           this._compareNumDrinks = this._numOfDrinks;
-
                         });
                       },
                       onSaved: (value) {
