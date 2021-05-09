@@ -34,6 +34,7 @@ class _MyAppState extends State<MyApp> {
   String _valueToValidate = '';
 
   int _numOfDrinks = 1;
+  int _compareNumDrinks = 1;
   //static const IconData tea_cup = IconData(0xf1a6, fontFamily: 'MaterialIcons');
 
   @override
@@ -56,8 +57,8 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  Widget _datetimeForm(BuildContext context, int listCaffeIndex) {
-    listCaffeIndex = listCaffeIndex - 1;
+  Widget _datetimeForm(BuildContext context, int _listCaffeIndex) {
+    _listCaffeIndex = _listCaffeIndex - 1;
     caffeDate.add(_timeController.text);
 
     return ColoredBox(
@@ -90,19 +91,19 @@ class _MyAppState extends State<MyApp> {
                       print('change $date in time zone ' +
                           date.timeZoneOffset.inHours.toString());
                       setState(() {
-                        DateFormat('yyyy/MM/dd(E) HH:mm:ss').format(date);
-                        caffeDate[listCaffeIndex] = '$date';
+                        String _dateFormatted = DateFormat('yyyy/MM/dd(E) HH:mm').format(date);
+                        caffeDate[_listCaffeIndex] = _dateFormatted;
                       });
                     }, onConfirm: (date) {
                       setState(() {
-                        DateFormat('yyyy/MM/dd(E) HH:mm:ss').format(date);
-                        caffeDate[listCaffeIndex] = '$date';
+                        String _dateFormatted = DateFormat('yyyy/MM/dd(E) HH:mm').format(date);
+                        caffeDate[_listCaffeIndex] = _dateFormatted;
                       });
                       print('confirm $date');
                     }, locale: LocaleType.en);
                   },
                   child: Text(
-                    caffeDate[listCaffeIndex],
+                    caffeDate[_listCaffeIndex],
                     style: TextStyle(color: Colors.black87),
                   )),
               Expanded(
@@ -176,16 +177,20 @@ class _MyAppState extends State<MyApp> {
                       onFieldSubmitted: (value) {
                         setState(() {
                           this._numOfDrinks = int.parse(value);
+                          this._compareNumDrinks = this._numOfDrinks;
                         });
                       },
                       onChanged: (value) {
                         setState(() {
                           this._numOfDrinks = int.parse(value);
+                          this._compareNumDrinks = this._numOfDrinks;
+
                         });
                       },
                       onSaved: (value) {
                         setState(() {
                           this._numOfDrinks = int.parse(value!);
+                          this._compareNumDrinks = this._numOfDrinks;
                         });
                       },
                       decoration: const InputDecoration(
@@ -257,9 +262,12 @@ class _MyAppState extends State<MyApp> {
                                 List.generate(_numOfDrinks, (i) => i + 1);
                             if (index >= listCaffe.length) {
                               list.addAll([]);
+                            }
 
+                            if (_compareNumDrinks != _numOfDrinks) {
                               caffeDate.clear();
                             }
+
                             return _datetimeForm(context, listCaffe[index]);
                           },
                           itemCount: _numOfDrinks,
