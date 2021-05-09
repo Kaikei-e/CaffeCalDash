@@ -82,7 +82,7 @@ class _MyAppState extends State<MyApp> {
                             headerColor: Colors.brown[200]!,
                             backgroundColor: Colors.lightGreen[200]!,
                             itemStyle: TextStyle(
-                                color: Colors.white,
+                                color: Colors.black87,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18),
                             doneStyle:
