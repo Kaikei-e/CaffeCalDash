@@ -264,10 +264,6 @@ class _MyAppState extends State<MyApp> {
                               list.addAll([]);
                             }
 
-                            if (_compareNumDrinks != _numOfDrinks) {
-                              caffeDate.clear();
-                            }
-
                             return _datetimeForm(context, listCaffe[index]);
                           },
                           itemCount: _numOfDrinks,
