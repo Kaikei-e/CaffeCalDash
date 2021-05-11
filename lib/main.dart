@@ -36,6 +36,7 @@ class _MyAppState extends State<MyApp> {
   int _numOfDrinks = 1;
   int _compareNumDrinks = 1;
   String dropDownValue = '1';
+  late int caffeMg;
 
   @override
   void initState() {
@@ -117,16 +118,16 @@ class _MyAppState extends State<MyApp> {
                   ),
                   child: Text(
                     "Method: ",
-                    style: TextStyle(color: Colors.black87, fontSize: 18),
+                    style: TextStyle(color: Colors.black87, fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
               DropdownButton<String>(
                 value: dropDownValue,
                 icon: const Icon(Icons.arrow_circle_down_outlined),
-                iconSize: 22,
+                iconSize: 30,
                 elevation: 16,
-                style: const TextStyle(color: Colors.brown, fontSize: 18),
+                style: const TextStyle(color: Colors.brown, fontSize: 22),
                 onChanged: (String? newValue) {
                   setState(() {
                     dropDownValue = newValue!;
@@ -140,7 +141,56 @@ class _MyAppState extends State<MyApp> {
                   );
                 }).toList(),
               ),
-              
+              Expanded(
+                child: Container(
+                  margin: EdgeInsets.all(5),
+                  decoration: new BoxDecoration(
+                    border: new Border(bottom: BorderSide(width: 2)),
+                  ),
+                  child: TextFormField(
+                    controller: numController,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                    ],
+                    maxLength: 4,
+                    maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                    onFieldSubmitted: (value) {
+                      setState(() {
+                        this.caffeMg = int.parse(value);
+                      });
+                    },
+                    onChanged: (value) {
+                      setState(() {
+                        this.caffeMg = int.parse(value);
+                      });
+                    },
+                    onSaved: (value) {
+                      setState(() {
+                        this.caffeMg = int.parse(value!);
+                      });
+                    },
+                    decoration: const InputDecoration(
+                      labelStyle: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87,
+                      ),
+                      hintText: "Enter caffeine mg.",
+                      counterText: "",
+                    ),
+                    keyboardType: TextInputType.number,
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter some value.';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+              ),
             ],
           ),
         ));
