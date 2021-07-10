@@ -38,6 +38,7 @@ class _MyAppState extends State<MyApp> {
   num _numCaffeMg = 0;
   int _compareNumDrinks = 1;
   String dropDownValue = '1';
+  late int caffeMg;
 
   @override
   void initState() {
@@ -119,16 +120,16 @@ class _MyAppState extends State<MyApp> {
                   ),
                   child: Text(
                     "Method: ",
-                    style: TextStyle(color: Colors.black87, fontSize: 18),
+                    style: TextStyle(color: Colors.black87, fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
               DropdownButton<String>(
                 value: dropDownValue,
                 icon: const Icon(Icons.arrow_circle_down_outlined),
-                iconSize: 22,
+                iconSize: 30,
                 elevation: 16,
-                style: const TextStyle(color: Colors.brown, fontSize: 18),
+                style: const TextStyle(color: Colors.brown, fontSize: 22),
                 onChanged: (String? newValue) {
                   setState(() {
                     dropDownValue = newValue!;
