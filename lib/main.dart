@@ -22,6 +22,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final _formkey = GlobalKey<FormState>();
   final numController = TextEditingController();
+  final caffeController = TextEditingController();
   late TextEditingController _timeController;
 
   List<String> caffeDate = [];
@@ -34,6 +35,7 @@ class _MyAppState extends State<MyApp> {
   String _valueToValidate = '';
 
   int _numOfDrinks = 1;
+  num _numCaffeMg = 0;
   int _compareNumDrinks = 1;
   String dropDownValue = '1';
 
@@ -140,7 +142,46 @@ class _MyAppState extends State<MyApp> {
                   );
                 }).toList(),
               ),
-              
+              TextFormField(
+                      controller: caffeController,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      maxLength: 4,
+                      onFieldSubmitted: (value) {
+                        setState(() {
+                          this._numCaffeMg = value as num;
+                        });
+                      },
+                      onChanged: (value) {
+                        setState(() {
+                          this._numOfDrinks = value as int;
+                        });
+                      },
+                      onSaved: (value) {
+                        setState(() {
+                          this._numOfDrinks = value as int;
+                        });
+                      },
+                      decoration: const InputDecoration(
+                        icon: Icon(Icons.emoji_food_beverage_sharp,
+                            color: Colors.white70),
+                        labelText:
+                            'Enter the number of caffeine in mg',
+                        labelStyle: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
+                        ),
+                      ),
+                      keyboardType: TextInputType.number,
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter some value.';
+                        }
+                        return null;
+                      },
+              ),
             ],
           ),
         ));
